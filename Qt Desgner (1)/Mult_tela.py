@@ -101,6 +101,18 @@ def pesquisa_produto2():
     for i in range(0, len(dados)):
         for j in range (0,7):
             configuracao.tableWidget.setItem(i,j,QtWidgets.QTableWidgetItem(str(dados[i][j])))
+
+def alter_table():
+    
+   cod=configuracao.cod_pro.text()
+   nome=configuracao.nome_pro_alt.text()
+   fornecedor=configuracao.fornecedor_alt.text()
+   custo_fab=configuracao.custo_fab_alt.text()
+   valor_ved=configuracao.valor_ved_alt.text()
+   
+   cursor = conexao.cursor()
+   alt="UPDATE cadastro_produto SET nome = '{}', fornecedor = '{}', custo_fabrica = '{}', valor_venda = '{}' where cod = '{}' ".format (nome,fornecedor,custo_fab,valor_ved, cod)
+   cursor.execute(alt)
      
 def chama_login_cliente(): #Operação de chama a tela de login do cliente
     inicial.hide() #esconder tela inicial 
@@ -204,6 +216,7 @@ cadaspro.Button_Cadastrar.clicked.connect(cadastra_produto)
 venda.botaomenu.clicked.connect(voltar_tela_inicial2)#ação do botão para voltara tela inicial 2, para volatar a tela.
 configuracao.botao_pesquisa.clicked.connect(pesquisa_produto)
 configuracao.botao_pesquisa.clicked.connect(pesquisa_produto2)
+configuracao.botao_alt.clicked.connect(alter_table)
 
 inicial.show() #iniciar programa
 app.exec() #executar o programa 
